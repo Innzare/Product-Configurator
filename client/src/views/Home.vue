@@ -6,7 +6,8 @@
       <p>Чтобы перейти в Конфигуратор воспользуйтесь навигацией в хедере <span class="emoji">&#128070;</span></p>
 
       <div>
-        Ссылки: <a class="home__link" href="" target="_blank">Исходный код</a>,
+        Ссылки:
+        <a class="home__link" href="https://github.com/Innzare/Product-Configurator" target="_blank">Исходный код</a>,
         <a class="home__link" href="https://hh.ru/resume/63f494faff051df1290039ed1f756c33416479" target="_blank">
           Резюме
         </a>

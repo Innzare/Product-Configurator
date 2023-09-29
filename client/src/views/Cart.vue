@@ -18,7 +18,7 @@ import { useStore } from 'vuex';
 import CartItem from '@/components/CartItem';
 
 export default defineComponent({
-  name: 'Preview',
+  name: 'Cart',
   components: {
     CartItem
   },

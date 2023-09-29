@@ -14,16 +14,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import Preview from '@/views/Preview';
-import Configurator from '@/views/Configurator';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Preview,
-    Configurator,
     Header,
     Footer
   },

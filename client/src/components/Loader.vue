@@ -14,8 +14,8 @@ export default {
   border-style: solid;
   border-color: #aaaaaa #aaaaaa #aaaaaa transparent;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   animation: spin 1s infinite linear;
 }
 

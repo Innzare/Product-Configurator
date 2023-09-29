@@ -2,19 +2,25 @@
   <div class="form">
     <h1 class="form__title">Конфигуратор кофемашины</h1>
 
-    <div class="form__content" v-if="!isLoading">
-      <ConfigurationSettings
-        :config="configurationsToRender"
-        @onSettingsChange="onSelectedConfigurationsChange"
-        @onSettingsClear="onSelectedConfigurationsClear"
-      />
-      <ConfigurationPreview :settings="selectedConfigurations" :config="configurations" />
+    <div :class="['form__content', { 'form__content--loading': isLoading }]">
+      <Loader v-if="isLoading" />
+
+      <template v-else>
+        <ConfigurationSettings
+          :config="configurationsToRender"
+          @onSettingsChange="onSelectedConfigurationsChange"
+          @onSettingsClear="onSelectedConfigurationsClear"
+        />
+        <ConfigurationPreview :settings="selectedConfigurations" :config="configurations" />
+      </template>
     </div>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref, computed, onMounted } from 'vue';
+import { getConfigurations } from '@/api';
+import Loader from '@/components/Loader';
 import ConfigurationSettings from '@/components/Configuration/ConfigurationSettings';
 import ConfigurationPreview from '@/components/Configuration/ConfigurationPreview';
 
@@ -22,7 +28,8 @@ export default defineComponent({
   name: 'Configurator',
   components: {
     ConfigurationSettings,
-    ConfigurationPreview
+    ConfigurationPreview,
+    Loader
   },
 
   setup() {
@@ -32,24 +39,22 @@ export default defineComponent({
     const initialConfigurations = {};
 
     onMounted(() => {
-      fetch('http://localhost:8081/configurations')
-        .then((res) => res.json())
-        .then(({ configurations: configurationsFromResponse }) => {
-          configurations.value = configurationsFromResponse;
+      getConfigurations().then(({ configurations: configurationsFromResponse }) => {
+        configurations.value = configurationsFromResponse;
 
-          configurationsFromResponse.forEach((config) => {
-            const { field, values } = config;
-            const isValuesExist = Array.isArray(values) && values.length > 0;
+        configurationsFromResponse.forEach((config) => {
+          const { field, values } = config;
+          const isValuesExist = Array.isArray(values) && values.length > 0;
 
-            if (isValuesExist) {
-              initialConfigurations[field] = values[0];
-            }
-          });
-
-          selectedConfigurations.value = { ...initialConfigurations };
-
-          isLoading.value = false;
+          if (isValuesExist) {
+            initialConfigurations[field] = values[0];
+          }
         });
+
+        selectedConfigurations.value = { ...initialConfigurations };
+
+        isLoading.value = false;
+      });
     });
 
     const configurationsToRender = computed(() => {
@@ -114,6 +119,11 @@ export default defineComponent({
     height: 100%;
     border: 1px solid rgba(163, 163, 163, 0.4);
     border-radius: 8px;
+
+    &--loading {
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 </style>
