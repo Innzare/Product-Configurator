@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input {
+  border: none;
+  background: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
