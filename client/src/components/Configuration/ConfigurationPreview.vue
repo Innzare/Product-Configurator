@@ -94,6 +94,8 @@ export default defineComponent({
     const onSaveConfigurationClick = () => {
       const id = generateRandomId();
       store.dispatch('addConfiguration', { ...settings, id });
+
+      alert('Ваша конфигурация добавлена в корзину!');
     };
 
     return {
