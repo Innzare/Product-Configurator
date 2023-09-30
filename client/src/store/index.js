@@ -1,9 +1,12 @@
 import { createStore } from 'vuex';
+import { LocalStorage } from '@/helpers/storage';
 
 export default createStore({
   state() {
+    const configurations = LocalStorage.get('configurations');
+
     return {
-      configurations: []
+      configurations
     };
   },
   mutations: {
@@ -11,7 +14,10 @@ export default createStore({
       state.configurations.push(data);
     },
     removeConfiguration(state, data) {
-      state.configurations = state.configurations.filter((item) => item.id !== data.id);
+      const configurationsFiltered = state.configurations.filter((item) => item.id !== data.id);
+      LocalStorage.set('configurations', configurationsFiltered);
+
+      state.configurations = configurationsFiltered;
     }
   },
   actions: {

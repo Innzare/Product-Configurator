@@ -8,12 +8,14 @@
       </div>
     </main>
 
+    <notifications success position="bottom right" />
+
     <Footer />
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 
@@ -24,9 +26,7 @@ export default defineComponent({
     Footer
   },
 
-  setup() {
-    return {};
-  }
+  setup() {}
 });
 </script>
 

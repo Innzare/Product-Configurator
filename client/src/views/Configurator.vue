@@ -120,6 +120,10 @@ export default defineComponent({
     border: 1px solid rgba(163, 163, 163, 0.4);
     border-radius: 8px;
 
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
     &--loading {
       justify-content: center;
       align-items: center;

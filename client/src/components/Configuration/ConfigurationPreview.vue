@@ -19,12 +19,14 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import { generateRandomId } from '@/helpers/common';
+import { LocalStorage } from '@/helpers/storage';
+import { useNotification } from '@kyvg/vue3-notification';
 import CoffeeMachineIcon from '@/components/SvgIcons/CoffeeMachineIcon';
 import CupIcon from '@/components/SvgIcons/CupIcon';
 import ActionButton from '@/components/ActionButton';
-import { generateRandomId } from '@/helpers/common';
 
 const AVAILABLE_COLORS = {
   white: {
@@ -75,6 +77,7 @@ export default defineComponent({
   setup(props) {
     const { settings, config } = props;
     const store = useStore();
+    const { notify } = useNotification();
 
     const selectedSize = computed(() => AVAILABLE_SIZES[settings.size.value]);
     const selectedColor = computed(() => AVAILABLE_COLORS[settings.color.value]);
@@ -95,7 +98,12 @@ export default defineComponent({
       const id = generateRandomId();
       store.dispatch('addConfiguration', { ...settings, id });
 
-      alert('Ваша конфигурация добавлена в корзину!');
+      LocalStorage.set('configurations', store.state.configurations);
+
+      notify({
+        title: 'Сохрание конфигурации',
+        text: 'Конфигурация успешно добавлена в корзину!'
+      });
     };
 
     return {
@@ -130,6 +138,7 @@ export default defineComponent({
 
   &__title {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
   }
@@ -137,6 +146,7 @@ export default defineComponent({
   &__content {
     display: flex;
     flex-direction: column;
+    padding: 16px;
     gap: 16px;
     justify-content: center;
     align-items: center;

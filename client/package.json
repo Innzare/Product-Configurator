@@ -46,6 +46,7 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^3.0.2",
     "axios": "^0.27.2",
     "vue": "^3.2.36",
     "vue-router": "^4.2.5",
