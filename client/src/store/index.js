@@ -3,7 +3,7 @@ import { LocalStorage } from '@/helpers/storage';
 
 export default createStore({
   state() {
-    const configurations = LocalStorage.get('configurations');
+    const configurations = LocalStorage.get('configurations') || [];
 
     return {
       configurations
